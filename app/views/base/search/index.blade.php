@@ -169,7 +169,7 @@
         $('#exp-hotel-info').remove();
         
         $('#ext-search-result').fadeOut(400, function(){
-            $('<div class="loader rounded white" style="display:none; text-align:center; padding:20px">Загрузка данных</div>').prependTo('#exp-result-content').fadeIn(400);
+            $('<div class="loader"></div>').prependTo('#exp-result-content').fadeIn(400);
         });
         
         $.ajax({
@@ -326,8 +326,15 @@
     $('#exp-form').ajaxForm({
         dataType: 'jsonp',
         beforeSubmit: function($formData, jqForm, options){
+            
+            if ($('#search-filter').is(':hidden')) {
+                $('#search-filter').slideDown(400);
+                $('#hotel-info-menu').slideUp(400);
+            }
+            
             if ($('#exp-form input[name="paging"]').val() == 'false') {
-                $('#exp-result-content').html('<p style="text-align:center">поиск отелей...</p>');
+                //$('#exp-result-content').html('<p style="text-align:center">поиск отелей...</p>');
+                $('#exp-result-content').html('<div class="loader"></div>');
             }
         }, 
         success:  function(data, statusText, xhr, $form){

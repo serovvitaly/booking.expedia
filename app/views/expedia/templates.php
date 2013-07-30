@@ -20,6 +20,7 @@
 <script id="tpl-hotel-info" type="text/x-jquery-tmpl">
 <div id="exp-hotel-info" class="rounded white" style="display:none">
   <div class="hi-title">
+    <i class="hi-close" onclick="retov(); return false;"></i>
     <span class="hi-name">${name}</span><span class="hi-stars"><img alt="рейтинг: ${hotelRating}" src="/skins/base/img/ratings/rat-${hotelRating}.png"></span>
   </div>
   <div class="rwrapper">
