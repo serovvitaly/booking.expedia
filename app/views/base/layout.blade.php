@@ -14,11 +14,14 @@
   <script src="/packages/jquery/tmpl/jquery.tmpl.min.js"></script>
   <script src="/packages/jquery/galleria/galleria-1.2.9.min.js"></script>
   <script src="/packages/jquery/easing/jquery.easing.1.3.min.js"></script>
+  <script src="/packages/jquery/scrollTo/jquery.scrollTo.min.js"></script>
   
   <link rel="stylesheet" type="text/css" href="/packages/jquery/Buttons/css/buttons.css">
   <script src="/packages/jquery/Buttons/js/buttons.js"></script>
   
   <script src="/packages/bootstrap/js/bootstrap.min.js"></script>
+  
+  <script src="/skins/base/js/references.js"></script>
   
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
   <script>

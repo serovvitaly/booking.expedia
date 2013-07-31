@@ -1,19 +1,16 @@
 <script id="tpl-search-result-item" type="text/x-jquery-tmpl">
-<div class="rounded white" style="margin: 0 10px 10px 0; display: inline-block; width: 48.85%;"><div class="rwrapper">
-  <div data-hotel="${hotelId}" class="media" style="cursor: pointer;">
-    <a class="pull-left"><img class="media-object" alt="64x64" style="width: 64px; height: 64px; margin-right: 10px;" src="http://images.travelnow.com${thumbNailUrl}"></a>
-    <div class="media-body">
-      
-      <h4 class="media-heading" style="color: #3680C5;">${name}</h4>
-      <p>${locationDescription}</p>
-      <div>
-        <h3>${lowRate} ${rateCurrencyCode}</h3>
-        <h4 style="text-decoration: line-through;color: #AFAFAF;">${highRate} ${rateCurrencyCode}</h4>
-      </div>
-      
-      <span style="padding: 3px 0; font-size:12px;font-weight: bold;">Рейтинг: ${tripAdvisorRating}</span>      
+<div data-hotel="${hotelId}" class="sri-box rounded white"><div class="rwrapper">
+    <div class="image"><img alt="64x64" src="http://images.travelnow.com${thumbNailUrl}"></div>
+    <div>
+      <div class="name">${name}<i class="icon-plane" title="${airportName}"></i></div>
+      <div class="note">${locationDescription}</div>
+      <div class="price"><span>от ${lowRate} <sup>${rateCurrencyCode}</sup></span><br>${totalRate}<sup style="font-size:9px">${rateCurrencyCode}</sup></div>     
     </div>
-  </div>
+    <div class="controls">
+      {{if likes > 0}}<span title="Нравится"><i class="icon-heart"></i> ${likes}</span>{{/if}}
+      {{if comments > 0}}<span title="Комментарии"><i class="icon-comment"></i> ${comments}</span>{{/if}}
+      <img class="rating" alt="рейтинг: ${hotelRating}" src="/skins/base/img/ratings/rat-blue-${hotelRating}.png" />
+    </div>
 </div></div>
 </script>
 
@@ -49,7 +46,14 @@
           
           </div>
           
-          <a href="#" onclick="return false;" class="button button-rounded button-flat-caution">БРОНИРОВАТЬ</a>
+          <a href="#" onclick="scrollToRooms(); return false;" class="button button-rounded button-flat-caution">БРОНИРОВАТЬ</a>
+          
+          <div>
+            <div class="btn-group" style="text-align: center">
+              <button class="btn btn-large" style="width: 120px" onclick="showMap(${latitude}, ${longitude}, '${name}');">На карте</button>
+              <button class="btn btn-large" style="width: 120px" onclick="showPan(${latitude}, ${longitude});">Панорама</button>
+            </div>
+          </div>
           
         </div>
       </div>
@@ -89,7 +93,7 @@
   </div>
   {{/if}}
   
-  <div class="rooms-container rwrapper">
+  <div class="rooms-container">
   </div>
 
 </div>
@@ -240,9 +244,18 @@
 
 
 <script id="tpl-hotel-room" type="text/x-jquery-tmpl">
-<div class="hotel-room"><div>
-  <strong>${roomTypeDescription}</strong>
-</div></div>
+<div class="hotel-room rwrapper">
+  <div class="hr-sp-6">
+    <strong>${roomTypeDescription}</strong>
+    <div>Максимальная вместимость: ${quotedOccupancy}</div>
+  </div>
+  <div class="hr-sp-2 hr-right hr-price">
+    ${rateTotal} <sup>${currencyCode}</sup>
+  </div>
+  <div class="hr-sp-2 hr-right">
+    <a href="#" onclick="return false;" class="button button-rounded button-flat-caution button-small">БРОНИРОВАТЬ</a>
+  </div>
+</div>
 </script>
 
 <script id="tpl-book-result" type="text/x-jquery-tmpl">

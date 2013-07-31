@@ -24,7 +24,7 @@
       <fieldset style="margin-bottom: 30px; margin-top: 20px;">
         <input type="text" style="width: 236px; display: inline;" name="city" placeholder="Город" value="Moscow">
         <input type="text" style="width: 72px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
-        <input type="text" style="width: 73px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/05/2013">
+        <input type="text" style="width: 73px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
       </fieldset>
       
       <div id="search-filter">
@@ -138,6 +138,7 @@
     function retov(){
         $('#exp-hotel-info').fadeOut(400, function(){
             $('#ext-search-result').fadeIn(400);
+            delete $.template["tpl-hotel-info"];
             $('#exp-hotel-info').remove(); 
         });
         
@@ -161,11 +162,37 @@
     }
     
     
+    function scrollToRooms(){
+        $.scrollTo($('#exp-hotel-info .rooms-container'), 800);
+    }
+    
+    
+    function showMap(latitude, longitude, name){
+        
+        if ( typeof latitude != 'number' &&  typeof longitude != 'number' ) {
+            return false;
+        }
+        
+        if ( $('#exp-hotel-info .hotel-map-box').is(':hidden') ) {
+            $('#exp-hotel-info .hotel-map-box').slideDown(400, null, function(){
+                $.scrollTo($('#exp-hotel-info .hotel-map-box'), 800);
+                gmapInitialize('hotel-map', {
+                    zoom: 17,
+                    hotelName: name,
+                    latitude:  latitude,
+                    longitude: longitude
+                });
+            });
+        }
+    }
+    
+    
     function loadHotelInfo(options){
         var fields = $.extend({
             //
         }, options);
         
+        delete $.template["tpl-hotel-info"];
         $('#exp-hotel-info').remove();
         
         $('#ext-search-result').fadeOut(400, function(){
@@ -178,7 +205,7 @@
             type: 'POST',
             data: fields,
             success: function(data){
-                console.log(data);
+                //console.log(data);
                 if (data.errors && data.errors.length > 0) {
                     $('#exp-result-content .loader').html('');
                     $.each(data.errors, function(index, item){
@@ -187,74 +214,74 @@
                     return;
                 }
                 if (data.result) {
-                    $('#exp-result-content .loader').fadeOut(100, function(){
-                        //data.result.checkInInstructions = htmlspecialchars_decode(data.result.checkInInstructions);
-                        $.tmpl($('#tpl-hotel-info').html().trim(), data.result).appendTo('#exp-result-content');
+                    $('#exp-result-content .loader').fadeOut(100, function(){});
+                    //data.result.checkInInstructions = htmlspecialchars_decode(data.result.checkInInstructions);
+                    $.tmpl($('#tpl-hotel-info').html().trim(), data.result).appendTo('#exp-result-content');
 
-                        $('#exp-hotel-info .room-item a.book').click(function(){
-                            var item = $(this);
-                            $('#exp-hotel-info').fadeOut(200, function(){
-                                $.tmpl($('#tpl-book-form').html().trim(), {
-                                    hotelId: data.result.HotelSummary.hotelId,
-                                    arrivalDate: data.result.HotelRoomAvailabilityResponse.arrivalDate,
-                                    departureDate: data.result.HotelRoomAvailabilityResponse.departureDate,
-                                    supplierType: item.attr('data-suppliertype'),
-                                    rateKey: item.attr('data-ratekey'),
-                                    roomTypeCode: item.attr('data-roomtypecode'),
-                                    rateCode: item.attr('data-ratecode'),
-                                    currencyCode: item.attr('data-currencycode'),
-                                    commissionableUsdTotal: item.attr('data-commissionableusdtotal'),
-                                    surchargeTotal: item.attr('data-surchargetotal'),
-                                    chargeableRate: item.attr('data-chargeablerate')
-                                }).appendTo('#exp-result-content');
-                                $('#exp-book-form .button-return').click(function(){
-                                    $('#exp-book-form').fadeOut(200, function(){
-                                        $('#exp-hotel-info').fadeIn(200);
-                                        $('body,html').animate({scrollTop: 0}, 200);
-                                        $('#exp-book-form').remove();
-                                    });
+                    $('#exp-hotel-info .room-item a.book').click(function(){
+                        var item = $(this);
+                        $('#exp-hotel-info').fadeOut(200, function(){
+                            $.tmpl($('#tpl-book-form').html().trim(), {
+                                hotelId: data.result.HotelSummary.hotelId,
+                                arrivalDate: data.result.HotelRoomAvailabilityResponse.arrivalDate,
+                                departureDate: data.result.HotelRoomAvailabilityResponse.departureDate,
+                                supplierType: item.attr('data-suppliertype'),
+                                rateKey: item.attr('data-ratekey'),
+                                roomTypeCode: item.attr('data-roomtypecode'),
+                                rateCode: item.attr('data-ratecode'),
+                                currencyCode: item.attr('data-currencycode'),
+                                commissionableUsdTotal: item.attr('data-commissionableusdtotal'),
+                                surchargeTotal: item.attr('data-surchargetotal'),
+                                chargeableRate: item.attr('data-chargeablerate')
+                            }).appendTo('#exp-result-content');
+                            $('#exp-book-form .button-return').click(function(){
+                                $('#exp-book-form').fadeOut(200, function(){
+                                    $('#exp-hotel-info').fadeIn(200);
+                                    $('body,html').animate({scrollTop: 0}, 200);
+                                    $('#exp-book-form').remove();
                                 });
-                                $('#exp-book-form form').ajaxForm({
-                                    dataType: 'json',
-                                    beforeSubmit: function($formData, jqForm, options){
-                                        $('#exp-book-form').fadeOut(200, function(){
-                                            $.tmpl($('#tpl-book-result').html().trim(), {
-                                                content: '<h3>Бронируем комнату...</h3>'
-                                            }).appendTo('#exp-result-content');
-                                            $('#exp-book-result').fadeIn(200);
-                                        });
-                                    },
-                                    success:  function(data, statusText, xhr, $form){
-                                        
-                                        if (data.errors && data.errors.length > 0) {
-                                            $('#exp-book-result .content').html('');
-                                            $.each(data.errors, function(index, item){
-                                                $('#exp-book-result .content').append('<p style="text-align:center">'+item.message+'</p>');
-                                            });
-                                            return;
-                                        }
-                                        
-                                        if (data.success == true && data.result.itineraryId && data.result.itineraryId > 0) {
-                                            $('#exp-book-result').fadeOut(200, function(){
-                                                $.tmpl($('#tpl-book-success').html().trim(), data.result).appendTo('#exp-result-content');
-                                                $('#exp-book-success').fadeIn(200, function(){
-                                                    $('#exp-book-result').remove();
-                                                });
-                                            });
-                                        } else {
-                                            $('#exp-book-result .content').html('<strong style="color:red">Не удалось забронировать</strong>');
-                                        }
-                                    }
-                                });
-                                $('#exp-book-form').fadeIn(200);
-                                $('body,html').animate({scrollTop: 0}, 200);
                             });
+                            $('#exp-book-form form').ajaxForm({
+                                dataType: 'json',
+                                beforeSubmit: function($formData, jqForm, options){
+                                    $('#exp-book-form').fadeOut(200, function(){
+                                        $.tmpl($('#tpl-book-result').html().trim(), {
+                                            content: '<h3>Бронируем комнату...</h3>'
+                                        }).appendTo('#exp-result-content');
+                                        $('#exp-book-result').fadeIn(200);
+                                    });
+                                },
+                                success:  function(data, statusText, xhr, $form){
+                                    
+                                    if (data.errors && data.errors.length > 0) {
+                                        $('#exp-book-result .content').html('');
+                                        $.each(data.errors, function(index, item){
+                                            $('#exp-book-result .content').append('<p style="text-align:center">'+item.message+'</p>');
+                                        });
+                                        return;
+                                    }
+                                    
+                                    if (data.success == true && data.result.itineraryId && data.result.itineraryId > 0) {
+                                        $('#exp-book-result').fadeOut(200, function(){
+                                            $.tmpl($('#tpl-book-success').html().trim(), data.result).appendTo('#exp-result-content');
+                                            $('#exp-book-success').fadeIn(200, function(){
+                                                $('#exp-book-result').remove();
+                                            });
+                                        });
+                                    } else {
+                                        $('#exp-book-result .content').html('<strong style="color:red">Не удалось забронировать</strong>');
+                                    }
+                                }
+                            });
+                            $('#exp-book-form').fadeIn(200);
+                            $('body,html').animate({scrollTop: 0}, 200);
                         });
-                      /*  $('#exp-hotel-info').fadeIn(400, function(){
-                            $('body,html').animate({scrollTop: 0}, 400);
-                        });*/
-                        
                     });
+                  /*  $('#exp-hotel-info').fadeIn(400, function(){
+                        $('body,html').animate({scrollTop: 0}, 400);
+                    });*/
+                        
+                    
                     
                     $('#search-filter').slideUp(400);
                     
@@ -270,11 +297,11 @@
                             },
                             success: function(data){
                                 
-                                console.log(data);
+                                //console.log(data);
                                 
                                 if (data.success) {
-                                    if (data.result.rooms.length > 0) {
-                                        $.each(data.result.rooms, function(index, item){
+                                    if (data.result.items.length > 0) {
+                                        $.each(data.result.items, function(index, item){
                                             $.tmpl($('#tpl-hotel-room').html().trim(), item).appendTo('#exp-hotel-info .rooms-container');
                                         });
                                     }
@@ -294,17 +321,6 @@
                                 });
                                 
                                 $('#hotel-galleria').fadeIn(400);    
-                            }
-                            
-                            if ( typeof data.result.latitude == 'number' &&  typeof data.result.longitude == 'number' ) {
-                                gmapInitialize('hotel-map', {
-                                    zoom: 17,
-                                    hotelName: data.result.name,
-                                    latitude:  data.result.latitude,
-                                    longitude: data.result.longitude
-                                });
-                                
-                                $('.hotel-map-box').fadeIn(400);
                             }
                             
                             $('body,html').animate({scrollTop: 0}, 400);
@@ -350,7 +366,7 @@
                     $.tmpl($('#tpl-search-result-item').html().trim(), item).appendTo('#ext-search-result');
                 });
                 
-                $('#ext-search-result .media').click(function(){
+                $('#ext-search-result .sri-box').click(function(){
                     loadHotelInfo({
                         hotelId: $(this).attr('data-hotel'),
                         arrivalDate:   $('#exp-form input[name="arrivalDate"]').val(),
