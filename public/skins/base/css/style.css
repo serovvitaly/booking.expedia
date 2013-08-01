@@ -14,6 +14,12 @@ body{
     clear: both;
 }
 
+.btn-mini, .btn-group>.btn-mini{
+    font-size: 11px;
+    font-family: tahoma;
+}
+
+
 .rounded{
     -webkit-border-radius: 2px;
        -moz-border-radius: 2px;
@@ -43,10 +49,31 @@ body{
     margin-bottom: 40px;
 }
 
+.is-sticky #exp-sort-panel{
+    opacity: 0.95;
+    filter: alpha(opacity=95);
+    width: 870px;
+    z-index: 200;
+}
+
 #exp-hotel-info{
     padding-bottom: 10px;
 }
 
+#exp-search-result{
+    margin-right: -10px;
+    margin-top: 7px; 
+}
+
+#hotel-info-menu{
+    margin-bottom: 10px;
+}
+
+#retov-button{
+    margin-bottom: 10px;
+    width: 100%;
+    display: none;
+}
 
 .rounded.white{
     background: #FFFFFF;
@@ -352,4 +379,19 @@ body{
 .sri-box .controls .rating{
     float: right;
     margin-top: 4px;
+}
+
+
+#portamento_container {
+    float:right; 
+    position:relative;
+}
+
+#portamento_container #example {
+    float:none; 
+    position:absolute;
+}
+
+#portamento_container #example.fixed {
+    position:fixed;
 }

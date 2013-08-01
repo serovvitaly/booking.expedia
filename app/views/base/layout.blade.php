@@ -15,6 +15,7 @@
   <script src="/packages/jquery/galleria/galleria-1.2.9.min.js"></script>
   <script src="/packages/jquery/easing/jquery.easing.1.3.min.js"></script>
   <script src="/packages/jquery/scrollTo/jquery.scrollTo.min.js"></script>
+  <script src="/packages/jquery/sticky/jquery.sticky.js"></script>
   
   <link rel="stylesheet" type="text/css" href="/packages/jquery/Buttons/css/buttons.css">
   <script src="/packages/jquery/Buttons/js/buttons.js"></script>
@@ -53,10 +54,9 @@
   
 </head>
 <body>
+  @include('base.common.topmenu')
+  <div style="height: 50px;"></div>
   <div class="container">
-    <div class="row">
-      <div class="span12">Верхнее меню</div>
-    </div>
     {{$content}}
     <footer>
     

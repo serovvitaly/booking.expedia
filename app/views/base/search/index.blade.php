@@ -1,94 +1,112 @@
 
 <div class="row">
   <div class="span3">
-  <div class="rounded white" data-spy="affix" style="width: 270px">
-    
-    <div class="rwrapper" id="hotel-info-menu" style="display: none;">
-       <ul class="nav nav-list menu-list">
-         <li><a href="#"><i class="icon-chevron-right"></i>Информация об отеле</a></li>
-         <li><a href="#"><i class="icon-chevron-right"></i>Статистика</a></li>
-         <li><a href="#"><i class="icon-chevron-right"></i>Расположение</a></li>
-         <li><a href="#"><i class="icon-chevron-right"></i>Опции отеля</a></li>
-         <li><a href="#"><i class="icon-chevron-right"></i>Комнаты</a></li>
-         <li><a href="#" onclick="retov(); return false;" class="button button-rounded button-flat-action">Вернуться к списку отелей</a></li>
-       </ul>
-    </div>
-     
-    <div class="rwrapper">
-    <form action="http://api.appros/expedia/search" method="POST" id="exp-form">
-      
-      <input type="hidden" name="page" value="1">
-      
-      <input type="submit" class="button button-rounded button-flat-primary" style="width: 100%;" value="Поиск отелей">
-      
-      <fieldset style="margin-bottom: 30px; margin-top: 20px;">
-        <input type="text" style="width: 236px; display: inline;" name="city" placeholder="Город" value="Moscow">
-        <input type="text" style="width: 72px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
-        <input type="text" style="width: 73px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
-      </fieldset>
-      
-      <div id="search-filter">
-      
-          <fieldset style="margin-bottom: 30px; margin-top: 20px; display: none;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Цена</legend>
-            от: <input type="text" style="width: 50px; display: inline;">
-            до: <input type="text" style="width: 50px; display: inline;">
-          </fieldset>
-          
-          <fieldset style="margin-bottom: 30px;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Удобства</legend>
-            <label><input name="amenities[1]" value="1" type="checkbox" style="display: inline;"> - бассейн</label>
-            <label><input name="amenities[2]" value="2" type="checkbox" style="display: inline;"> - фитнес-центр</label>
-            <label><input name="amenities[3]" value="3" type="checkbox" style="display: inline;"> - ресторан</label>
-            <label><input name="amenities[4]" value="4" type="checkbox" style="display: inline;"> - мероприятия для детей</label>
-            <label><input name="amenities[5]" value="5" type="checkbox" style="display: inline;"> - бесплатный завтрак</label>
-            <label><input name="amenities[6]" value="6" type="checkbox" style="display: inline;"> - конференц залы</label>
-            <label><input name="amenities[7]" value="7" type="checkbox" style="display: inline;"> - с животными</label>
-            <label><input name="amenities[8]" value="8" type="checkbox" style="display: inline;"> - инвалидной коляске</label>
-            <label><input name="amenities[9]" value="9" type="checkbox" style="display: inline;"> - кухня/мини-кухня</label>
-          </fieldset>
-            
-          <fieldset style="margin-bottom: 30px;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Рейтинг отеля</legend>
-            от: <input type="text" style="width: 50px; display: inline;" name="minStarRating">
-            до: <input type="text" style="width: 50px; display: inline;" name="maxStarRating">
-          </fieldset>
-          
-          <fieldset style="margin-bottom: 30px;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Тип проживания</legend>
-            <label><input name="propertyCategory[1]" value="1" type="checkbox" style="display: inline;"> - отель</label>
-            <label><input name="propertyCategory[2]" value="2" type="checkbox" style="display: inline;"> - люкс</label>
-            <label><input name="propertyCategory[3]" value="3" type="checkbox" style="display: inline;"> - курортный</label>
-            <label><input name="propertyCategory[4]" value="4" type="checkbox" style="display: inline;"> - аренда на отпуск/кондо</label>
-            <label><input name="propertyCategory[5]" value="5" type="checkbox" style="display: inline;"> - завтрак в кровать</label>
-            <label><input name="propertyCategory[6]" value="6" type="checkbox" style="display: inline;"> - все включено</label>
-          </fieldset>
-          
-          <fieldset style="margin-bottom: 30px;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Количество спален</legend>
-            <input type="text" style="width: 50px; display: inline;" name="numberOfBedRooms">
-          </fieldset>
-          
-          <fieldset style="margin-bottom: 30px;">
-            <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px; display: none;">Достопримечательности</legend>
-            
-          </fieldset>
-      
-      </div>
-      
-      <input name="paging" type="hidden" value="false">
-      <input name="cacheKey" type="hidden">
-      <input name="cacheLocation" type="hidden">
+    <div class="sticker" style="width: 270px">
+      <div class="rounded white" id="hotel-info-menu" style="display: none;">
+        <div class="rwrapper">
+           <ul class="nav nav-list menu-list">
+             <li><a href="#"><i class="icon-chevron-right"></i>Информация об отеле</a></li>
+             <li><a href="#"><i class="icon-chevron-right"></i>Статистика</a></li>
+             <li><a href="#"><i class="icon-chevron-right"></i>Расположение</a></li>
+             <li><a href="#"><i class="icon-chevron-right"></i>Опции отеля</a></li>
+             <li><a href="#"><i class="icon-chevron-right"></i>Комнаты</a></li>
+           </ul>
+        </div>
+      </div>  
+      <div class="rounded white">
+        <div class="rwrapper">
+        <form action="http://api.appros/expedia/search" method="POST" id="exp-form">
         
-    </form>
-    </div> 
+          <button class="button button-rounded button-flat-action" id="retov-button" onclick="retov(); return false;"><i class="icon-chevron-left icon-white"></i> Вернуться к списку отелей</button>
+          
+          <input type="submit" class="button button-rounded button-flat-primary" style="width: 100%;" value="Поиск отелей">
+          
+          <fieldset style="margin-bottom: 30px; margin-top: 20px;">
+            <input type="text" style="width: 236px; display: inline;" name="city" placeholder="Город" value="Moscow">
+            <input type="text" style="width: 72px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
+            <input type="text" style="width: 73px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
+          </fieldset>
+          
+          <div id="search-filter">
+          
+              <fieldset style="margin-bottom: 30px; margin-top: 20px; display: none;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Цена</legend>
+                от: <input type="text" style="width: 50px; display: inline;">
+                до: <input type="text" style="width: 50px; display: inline;">
+              </fieldset>
+              
+              <fieldset style="margin-bottom: 30px;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Удобства</legend>
+                <label><input name="amenities[1]" value="1" type="checkbox" style="display: inline;"> - бассейн</label>
+                <label><input name="amenities[2]" value="2" type="checkbox" style="display: inline;"> - фитнес-центр</label>
+                <label><input name="amenities[3]" value="3" type="checkbox" style="display: inline;"> - ресторан</label>
+                <label><input name="amenities[4]" value="4" type="checkbox" style="display: inline;"> - мероприятия для детей</label>
+                <label><input name="amenities[5]" value="5" type="checkbox" style="display: inline;"> - бесплатный завтрак</label>
+                <label><input name="amenities[6]" value="6" type="checkbox" style="display: inline;"> - конференц залы</label>
+                <label><input name="amenities[7]" value="7" type="checkbox" style="display: inline;"> - с животными</label>
+                <label><input name="amenities[8]" value="8" type="checkbox" style="display: inline;"> - инвалидной коляске</label>
+                <label><input name="amenities[9]" value="9" type="checkbox" style="display: inline;"> - кухня/мини-кухня</label>
+              </fieldset>
+                
+              <fieldset style="margin-bottom: 30px;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Рейтинг отеля</legend>
+                от: <input type="text" style="width: 50px; display: inline;" name="minStarRating">
+                до: <input type="text" style="width: 50px; display: inline;" name="maxStarRating">
+              </fieldset>
+              
+              <fieldset style="margin-bottom: 30px;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Тип проживания</legend>
+                <label><input name="propertyCategory[1]" value="1" type="checkbox" style="display: inline;"> - отель</label>
+                <label><input name="propertyCategory[2]" value="2" type="checkbox" style="display: inline;"> - люкс</label>
+                <label><input name="propertyCategory[3]" value="3" type="checkbox" style="display: inline;"> - курортный</label>
+                <label><input name="propertyCategory[4]" value="4" type="checkbox" style="display: inline;"> - аренда на отпуск/кондо</label>
+                <label><input name="propertyCategory[5]" value="5" type="checkbox" style="display: inline;"> - завтрак в кровать</label>
+                <label><input name="propertyCategory[6]" value="6" type="checkbox" style="display: inline;"> - все включено</label>
+              </fieldset>
+              
+              <fieldset style="margin-bottom: 30px;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px;">Количество спален</legend>
+                <input type="text" style="width: 50px; display: inline;" name="numberOfBedRooms">
+              </fieldset>
+              
+              <fieldset style="margin-bottom: 30px;">
+                <legend style="margin-bottom: 10px;font-size: 16px;line-height: 26px; display: none;">Достопримечательности</legend>
+                
+              </fieldset>
+          
+          </div>
+          
+          <input name="paging" type="hidden" value="false">
+          <input name="cacheKey" type="hidden">
+          <input name="cacheLocation" type="hidden">
+            
+        </form>
+        </div> 
+      </div>
+    </div>
   </div>
+  <div class="span9">
+    <div class="rounded white sticker" style="margin-bottom: 10px;" id="exp-sort-panel">
+        <div class="rwrapper">
+          <div class="btn-group">
+            <button class="btn btn-mini">по цене</button>
+            <button class="btn btn-mini">по рейтингу</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-mini">РУБ</button>
+            <button class="btn btn-mini">EUR</button>
+            <button class="btn btn-mini">USD</button>
+          </div>
+        </div>
+    </div>
+    <div id="exp-result-content"></div>
   </div>
-  <div class="span9" id="exp-result-content"></div>
 </div>
 
 
 <script>
+
+    $(".sticker").sticky({topSpacing: 41, bottomSpacing: 50});
     
     function htmlspecialchars_decode (string, quote_style) {
       var optTemp = 0,
@@ -137,12 +155,14 @@
     
     function retov(){
         $('#exp-hotel-info').fadeOut(400, function(){
-            $('#ext-search-result').fadeIn(400);
+            $('#exp-sort-panel-sticky-wrapper').fadeIn(400);
+            $('#exp-search-result').fadeIn(400);
             delete $.template["tpl-hotel-info"];
             $('#exp-hotel-info').remove(); 
         });
         
         $('#search-filter').slideDown(400);
+        $('#retov-button').fadeOut(200);
         $('#hotel-info-menu').slideUp(400);
     } 
     
@@ -195,7 +215,8 @@
         delete $.template["tpl-hotel-info"];
         $('#exp-hotel-info').remove();
         
-        $('#ext-search-result').fadeOut(400, function(){
+        $('#exp-sort-panel-sticky-wrapper').fadeOut(400);
+        $('#exp-search-result').fadeOut(400, function(){
             $('<div class="loader"></div>').prependTo('#exp-result-content').fadeIn(400);
         });
         
@@ -282,10 +303,11 @@
                     });*/
                         
                     
-                    
+                    $('#retov-button').fadeIn(200);
                     $('#search-filter').slideUp(400);
                     
                     $('#hotel-info-menu').slideDown(400, null, function(){
+                        
                         $('#exp-hotel-info .rooms-container').html('');
                         $.ajax({
                             url: 'http://api.appros/expedia/room-availability',
@@ -297,7 +319,7 @@
                             },
                             success: function(data){
                                 
-                                //console.log(data);
+                                console.log(data);
                                 
                                 if (data.success) {
                                     if (data.result.items.length > 0) {
@@ -359,14 +381,14 @@
             
             if (data.result && data.result.items && data.result.items.length > 0) {
                 if ($('#exp-form input[name="paging"]').val() == 'false') {
-                    $('#exp-result-content').html('<div id="ext-search-result"></div>');
+                    $('#exp-result-content').html('<div id="exp-search-result"></div>');
                 }
                 $.each(data.result.items, function(index, item){
                     //item.shortDescription = htmlspecialchars_decode(item.shortDescription.replace('&lt;b&gt;Местоположение. &lt;/b&gt; &lt;br /&gt;',''));
-                    $.tmpl($('#tpl-search-result-item').html().trim(), item).appendTo('#ext-search-result');
+                    $.tmpl($('#tpl-search-result-item').html().trim(), item).appendTo('#exp-search-result');
                 });
                 
-                $('#ext-search-result .sri-box').click(function(){
+                $('#exp-search-result .sri-box').click(function(){
                     loadHotelInfo({
                         hotelId: $(this).attr('data-hotel'),
                         arrivalDate:   $('#exp-form input[name="arrivalDate"]').val(),
@@ -383,14 +405,14 @@
                     var cacheKey      = data.addition.cacheKey;
                     var cacheLocation = data.addition.cacheLocation;
                     var pagination = '<div style="text-align:center; margin: 40px"><button onclick="loadNextPage(\''+cacheKey+'\',\''+cacheLocation+'\')" class="btn btn-large">Загрузить еще</button></div>';
-                    $('#ext-search-result').append(pagination);
+                    $('#exp-search-result').append(pagination);
                 }
                 else {
-                    //$('#ext-search-result').prepend('<p>Найдено '+data.result.length+'.</p>');
+                    //$('#exp-search-result').prepend('<p>Найдено '+data.result.length+'.</p>');
                 }
             }
             else {
-                $('#ext-search-result').prepend('<p>Найдено '+data.result.length+'.</p>');
+                //$('#exp-search-result').prepend('<p>Найдено '+data.result.total+'</p>');
             }
             
             if (data.errors && data.errors.length > 0) {
