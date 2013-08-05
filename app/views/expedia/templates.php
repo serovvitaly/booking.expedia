@@ -76,7 +76,7 @@
     <i class="arrow-down arrow-ral5011"></i>
   </div>
   
-  <div class="hotel-map-box" style="display:none"><div id="hotel-map" style="height:400px; width: 870px"></div></div>
+  <div class="hotel-map-box ajax-loader" style="display:none"><div id="hotel-map" style="height:400px; width: 870px"></div></div>
   
   {{if amenities.length > 0}}
   <div class="rwrapper" style="display:none">
@@ -248,6 +248,7 @@
   <div class="hr-sp-6">
     <strong>${roomTypeDescription}</strong>
     <div>Максимальная вместимость: ${quotedOccupancy}</div>
+    <a href="#">подробнее</a>
   </div>
   <div class="hr-sp-2 hr-right hr-price">
     ${rateTotal} <sup>${currencyCode}</sup>

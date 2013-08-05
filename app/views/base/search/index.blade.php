@@ -21,10 +21,103 @@
           
           <input type="submit" class="button button-rounded button-flat-primary" style="width: 100%;" value="Поиск отелей">
           
-          <fieldset style="margin-bottom: 30px; margin-top: 20px;">
+          <fieldset class="search-params">
             <input type="text" style="width: 236px; display: inline;" name="city" placeholder="Город" value="Moscow">
-            <input type="text" style="width: 72px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
-            <input type="text" style="width: 73px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
+            <input type="text" style="width: 105px; margin-right: 9px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
+            <input type="text" style="width: 105px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
+            <hr style="margin: 0;">
+            <a href="#">свернуть</a>
+            <table>
+                <tr>
+                    <td rowspan="3" class="sp-room-number">Комната 1</td>
+                    <td class="sp-item-row">Взрослых (18+)</td>
+                    <td>
+                      <select>
+                        <option value="1">1</option>
+                        <option value="2" selected="selected">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sp-item-row">Детей (0-17)</td>
+                    <td>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="sp-item-row">
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <select>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </td>
+                </tr>
+            </table>
+            
           </fieldset>
           
           <div id="search-filter">
@@ -91,6 +184,7 @@
           <div class="btn-group">
             <button class="btn btn-mini">по цене</button>
             <button class="btn btn-mini">по рейтингу</button>
+            <button class="btn btn-mini">по звездности</button>
           </div>
           <div class="btn-group">
             <button class="btn btn-mini">РУБ</button>
@@ -217,7 +311,7 @@
         
         $('#exp-sort-panel-sticky-wrapper').fadeOut(400);
         $('#exp-search-result').fadeOut(400, function(){
-            $('<div class="loader"></div>').prependTo('#exp-result-content').fadeIn(400);
+            $('<div class="loader ajax-loader"></div>').prependTo('#exp-result-content').fadeIn(400);
         });
         
         $.ajax({
@@ -372,7 +466,7 @@
             
             if ($('#exp-form input[name="paging"]').val() == 'false') {
                 //$('#exp-result-content').html('<p style="text-align:center">поиск отелей...</p>');
-                $('#exp-result-content').html('<div class="loader"></div>');
+                $('#exp-result-content').html('<div class="loader ajax-loader"></div>');
             }
         }, 
         success:  function(data, statusText, xhr, $form){

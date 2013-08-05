@@ -44,6 +44,12 @@ body{
     color: inherit;
 }
 
+.ajax-loader{
+    background: url(../img/loader-1.gif) no-repeat #F0F0F0 center;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
 
 #exp-result-content{
     margin-bottom: 40px;
@@ -251,6 +257,7 @@ body{
 .hotel-room .hr-sp-2{
     display: inline-block;
     width: 20%;
+    vertical-align: top;
 }
 .hotel-room .hr-right{
     text-align: right;
@@ -268,7 +275,6 @@ body{
     display:none;
     text-align:center;
     padding:100px;
-    background: #80FFFF;
 }
 
 
@@ -395,3 +401,32 @@ body{
 #portamento_container #example.fixed {
     position:fixed;
 }
+
+/* -- search-params -- */
+.search-params{
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.search-params table{
+    font: 11px/8px tahoma;
+    width: 100%;
+    margin-top: 10px;
+}
+.search-params table select{
+    padding: 1px;
+    width: 44px;
+    height: 21px; 
+    margin: -7px 0 7px;
+}
+.search-params table td{
+    vertical-align: top;
+    padding: 0 2px 2px;
+}
+.search-params .sp-room-number{
+    width: 60px;
+    border-right: 1px solid #969696;
+}
+.search-params .sp-item-row{
+    padding-left: 10px;
+}
+/* -- /search-params -- */
