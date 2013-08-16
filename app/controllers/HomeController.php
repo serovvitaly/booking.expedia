@@ -8,15 +8,14 @@ class HomeController extends BaseController {
     
     public function __construct()
     {
-        
         $this->afterFilter(function($router, $method, $response){
-            $response->header('Access-Control-Allow-Origin', 'http://api.appros');
+            //$response->header('Access-Control-Allow-Origin', 'http://api.appros');
         });
     }
     
     public function getIndex()
     {
-        //return View::make('hello');
+        return Redirect::to('go');
     }
 
     public function getGo()

@@ -17,14 +17,14 @@
         <div class="rwrapper">
         <form action="http://api.appros/expedia/search" method="POST" id="exp-form">
         
-          <button class="button button-rounded button-flat-action" id="retov-button" onclick="retov(); return false;"><i class="icon-chevron-left icon-white"></i> Вернуться к списку отелей</button>
+          <button class="button button-rounded button-flat-action" id="retov-button" onclick="retov(); return false;"><i class="icon-chevron-left icon-white" style="margin-left:-16px;margin-right:6px;"></i> Вернуться к списку отелей</button>
           
           <input type="submit" class="button button-rounded button-flat-primary" style="width: 100%;" value="Поиск отелей">
           
           <fieldset class="search-params">
             <input type="text" style="width: 236px; display: inline;" name="city" placeholder="Город" value="Moscow">
-            <input type="text" style="width: 105px; margin-right: 9px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="08/03/2013">
-            <input type="text" style="width: 105px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="08/08/2013">
+            <input type="text" style="width: 105px; margin-right: 9px; display: inline;" name="arrivalDate"   class="datepicker" placeholder="Заезд" value="<?= date('m/d/Y') ?>">
+            <input type="text" style="width: 105px; display: inline;" name="departureDate" class="datepicker" placeholder="Выезд" value="<?= date('m/d/Y', time() + 3600*24*7) ?>">
             <hr style="margin: 0;">
             <a href="#">свернуть</a>
             <table>
